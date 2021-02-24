@@ -9,7 +9,7 @@ name: nightly
 on:
   push:
     branches:
-    - github-actions
+    - github-actions-fix-cmake
 jobs:
   checkout:
     # only on the main repository
@@ -41,7 +41,7 @@ jobs:
           image: user/app:latest
           shell: bash
           run: |
-            git clone https://github.com/noonfom/mbed-os-example-blinky/tree/actions-cmake-fix
+            git clone -b actions-cmake-fix  https://github.com/noonfom/mbed-os-example-blinky
             cd mbed-os-example-blinky
             mbedtools deploy
             mbedtools compile -m K64F -t GCC_ARM
