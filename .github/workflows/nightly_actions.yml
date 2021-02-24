@@ -1,11 +1,15 @@
 name: nightly
 
-on: workflow_dispatch
+# on: workflow_dispatch
 # on:
 #   schedule:
 #     # every 10 mins
 #     - cron: "*/10 * * * *"
 
+on:
+  push:
+    branches:
+    - github-actions
 jobs:
   checkout:
     # only on the main repository
