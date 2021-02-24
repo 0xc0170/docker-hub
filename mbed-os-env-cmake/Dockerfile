@@ -19,7 +19,6 @@ RUN apt -y update && \
     python3-pip \
     software-properties-common \
     build-essential \
-    cmake \
     astyle \
     mercurial \
     ninja-build \
@@ -47,6 +46,11 @@ RUN wget -q https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/RC
     rm gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2
 ENV PATH="/root/gcc-arm-none-eabi-9-2019-q4-major/bin:${PATH}"
 
+# TODO remove after testing
+WORKDIR /root/
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-Linux-x86_64.tar.gz \
+    cd cmake-3.20.0-rc1-Linux-x86_64 \
+    ./configure --prefix=/opt.cmake && make && make install
 
 # ------------------------------------------------------------------------------
 # Display and save environment settings
