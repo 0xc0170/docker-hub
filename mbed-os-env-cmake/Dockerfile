@@ -19,7 +19,6 @@ RUN apt -y update && \
     python3-pip \
     software-properties-common \
     build-essential \
-    cmake \
     astyle \
     mercurial \
     ninja-build \
@@ -34,6 +33,14 @@ RUN pip3 install -U \
     cmake \
     mbed-tools
 
+# TODO remove after testing
+WORKDIR /root/
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-Linux-x86_64.tar.gz
+RUN tar -xjf cmake-3.20.0-rc1-Linux-x86_64.tar.gz 
+RUN rm cmake-3.20.0-rc1-Linux-x86_64.tar.gz
+RUN cd cmake-3.20.0-rc1-Linux-x86_64
+RUN ./configure --prefix=/opt.cmake && make && make install
+
 # Set up mbed environment
 WORKDIR /root/
 RUN wget https://github.com/ARMmbed/mbed-os/raw/master/requirements.txt && \
@@ -46,7 +53,6 @@ RUN wget -q https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/RC
     tar -xjf gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2 && \
     rm gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2
 ENV PATH="/root/gcc-arm-none-eabi-9-2019-q4-major/bin:${PATH}"
-
 
 # ------------------------------------------------------------------------------
 # Display and save environment settings

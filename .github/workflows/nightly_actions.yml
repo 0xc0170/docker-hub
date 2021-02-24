@@ -34,8 +34,8 @@ jobs:
           tags: user/app:latest
           file: ./mbed-os-env-cmake/Dockerfile
 
-      - name: Blinky test
-        id: blinky_build
+      - name: Build Blinky
+        id: build_blinky
         uses: addnab/docker-run-action@v2
         with:
           image: user/app:latest
