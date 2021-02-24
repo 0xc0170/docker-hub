@@ -35,11 +35,6 @@ RUN pip3 install -U \
 
 # TODO remove after testing
 WORKDIR /root/
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-Linux-x86_64.tar.gz
-RUN tar -xjf cmake-3.20.0-rc1-Linux-x86_64.tar.gz 
-RUN rm cmake-3.20.0-rc1-Linux-x86_64.tar.gz
-RUN cd cmake-3.20.0-rc1-Linux-x86_64
-RUN ./configure --prefix=/opt.cmake && make && make install
 
 # Set up mbed environment
 WORKDIR /root/
