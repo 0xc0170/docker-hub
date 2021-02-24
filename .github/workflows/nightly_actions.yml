@@ -1,9 +1,10 @@
 name: nightly
 
-on:
-  schedule:
-    # every 10 mins
-    - cron: "*/10 * * * *"
+on: workflow_dispatch
+# on:
+#   schedule:
+#     # every 10 mins
+#     - cron: "*/10 * * * *"
 
 jobs:
   checkout:
@@ -26,9 +27,18 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: false
+          tags: user/app:latest
+
       - name: Blinky test
         id: blinky_build
-        run: ./scripts/blinky_build.sh
+        uses: addnab/docker-run-action@v2
+        with:
+          image: user/app:latest
+          shell: bash
+          run: |
+            mbedtools import mbed-os-example-blinky
+            cd mbed-os-example-blinky
+            mbedtools compile -m  K64F -t GCC_ARM
 
   publish-nightly:
     needs: sanity-check

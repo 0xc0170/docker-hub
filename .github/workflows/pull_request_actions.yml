@@ -1,6 +1,0 @@
-name: Mbed OS docker CI
-on:
-  push:
-    branches:
-    - main
-  pull_request:
