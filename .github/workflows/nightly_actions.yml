@@ -31,6 +31,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: false
+          context: mbed-os-env-cmake
           tags: user/app:latest
           file: ./mbed-os-env-cmake/Dockerfile
 
@@ -41,9 +42,8 @@ jobs:
           image: user/app:latest
           shell: bash
           run: |
-            git clone https://github.com/noonfom/mbed-os-example-blinky/tree/actions-cmake-fix
+            mbedtools import mbed-os-example-blinky
             cd mbed-os-example-blinky
-            mbedtools deploy
             mbedtools compile -m K64F -t GCC_ARM
 
   publish-nightly:
@@ -64,6 +64,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          context: mbed-os-env-cmake
           tags: user/app:latest
           file: ./mbed-os-env-cmake/Dockerfile
 
