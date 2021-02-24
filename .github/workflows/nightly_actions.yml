@@ -41,9 +41,10 @@ jobs:
           image: user/app:latest
           shell: bash
           run: |
-            mbedtools import mbed-os-example-blinky
+            git clone https://github.com/noonfom/mbed-os-example-blinky/tree/actions-cmake-fix
             cd mbed-os-example-blinky
-            mbedtools compile -m  K64F -t GCC_ARM
+            mbedtools deploy
+            mbedtools compile -m K64F -t GCC_ARM
 
   publish-nightly:
     needs: sanity-check
